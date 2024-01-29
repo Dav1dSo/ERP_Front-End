@@ -1,8 +1,48 @@
-# React + Vite
+# ERP_Front-End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ERP system that seeks to give the user greater control over their product stock, simplifying data monitoring and facilitating bureaucratic processes through an intuitive interface and easy data reading.
 
-Currently, two official plugins are available:
+## 🛠️ Technologies used:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ``React JS``
+- ``Axios``
+- ``Styled-components``
+- ``Javascript ES6``
+
+## Functionalities
+
+- Authentication.
+- User registration
+- Product Registration
+- File upload
+- Issuing reports
+- Inventory control
+- Data listing
+
+Clone the project
+
+```bash
+  git clone https://github.com/Dav1dSo/ERP_Front-End.git
+```
+
+Enter the project directory
+
+```bash
+  cd ERP_Front-End
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+``` 
+
+## Api Reference
+
+[API_ERP](https://github.com/Dav1dSo/API_ERP.git)
