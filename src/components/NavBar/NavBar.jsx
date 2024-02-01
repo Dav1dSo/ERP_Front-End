@@ -4,7 +4,7 @@ const NavBar = () => {
   return (
     <Wrap>
       <ContainerNav>
-        <h1> Sistema ERP</h1>
+        <h2> Sistema ERP</h2>
       </ContainerNav>
     </Wrap>
   );

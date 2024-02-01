@@ -6,15 +6,14 @@ const Wrap = styled.div`
 `;
 
 const ContainerNav = styled.div`
-  height: 10vh;
+  height: 8vh;
   width: 100vw;
-  /* background-color: #75e2f0; */
-  background-color: #ffff;
+  background-color: #0dfd7d;
   display: flex;
   align-items: center;
 
-  h1 {
-    margin: 3%;
+  h2 {
+    margin: 2%;
     color: black
   }
 
