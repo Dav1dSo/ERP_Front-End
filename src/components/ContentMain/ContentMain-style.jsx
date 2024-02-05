@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const WrapContentMain = styled.div`
     height: 100vh;
-    width: 100vw;
+    width: 99vw;
 `;
 
 export default WrapContentMain;
