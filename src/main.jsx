@@ -7,7 +7,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
-    overflow: hidden; // Evita barras de rolagem no corpo do documento
+    overflow: auto;  
   }
 `;
 
