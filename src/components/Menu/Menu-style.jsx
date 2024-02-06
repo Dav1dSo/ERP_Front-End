@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const WrapMenu = styled.div`
-    max-height: 100vh;
+    height: 100vh;
     width: 22vw;
     background-color: #566164;
 

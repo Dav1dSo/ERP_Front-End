@@ -2,13 +2,15 @@ import styled from "styled-components";
 
 const ContainerProducts = styled.div`
   h1 {
-    margin: 2%;
+    margin: 3%;
   }
 `;
 
 const WrapButtons = styled.div`
+  margin-bottom: 8vh;
+  margin-left: 2vw;
+  margin-top: 4vh;
   display: flex;
-  margin: 30px;
   align-items: center;
 
   @media (max-width: 768px) {
