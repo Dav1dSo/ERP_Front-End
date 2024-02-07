@@ -32,6 +32,13 @@ const Input = styled.input`
   border: none;
   border-radius: 4px;
   width: 90%;
+
+  &[type="file"] {
+    border: 1px solid #a0a0a0;
+    padding: 0.5rem;
+    
+  }
+
 `;
 
 const TextArea = styled.textarea`
@@ -42,9 +49,17 @@ const TextArea = styled.textarea`
   resize: vertical;
 
   @media (max-width: 768px) {
-    max-width: 83%;  
+    max-width: 77%;  
   }
+`;
 
+const Select = styled.select`
+  padding: 0.7rem;
+  border: none;
+  border-radius: 4px;
+  width: 90%;
+
+  /* Adicione estilos adicionais conforme necessário */
 `;
 
 const Button = styled.button`
@@ -68,4 +83,5 @@ const Button = styled.button`
   }
 `;
 
-export { FormContainer, FormGroup, Label, Input, TextArea, Button, WrapForm };
+export { FormContainer, FormGroup, Label, Input, TextArea, Button,
+WrapForm, Select };
