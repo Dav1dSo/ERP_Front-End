@@ -8,7 +8,10 @@ import {
   TextArea,
   WrapForm,
 } from "./FormCreateProduct-style";
-import GetProductCategories from "../../../Services/GetCategories";
+import {
+  GetProductCategories,
+  CreateProduct,
+} from "../../../Services/GetCategories";
 
 const FormCreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -16,52 +19,72 @@ const FormCreateProduct = () => {
     name: "",
     price: "",
     description: "",
-    image: "",
+    images: null,
     stock: "",
     sold: 0,
     category: "",
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, files } = e.target;
+
+    if (name === 'images' && files.length > 0) {
+      const selectedFile = files[0];
+      setFormData({ ...formData, [name]: selectedFile });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    setFormData({
-      codProduct: "",
-      name: "",
-      price: "",
-      description: "",
-      image: "",
-      stock: "",
-      sold: 0,
-      category: "",
-    });
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('images', formData.images);
+    formDataToSend.append('codProduct', formData.codProduct);
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('price', formData.price);
+    formDataToSend.append('description', formData.description);
+    formDataToSend.append('stock', formData.stock);
+    formDataToSend.append('sold', formData.sold);
+    formDataToSend.append('category', formData.category);
+
+    try {
+      await CreateProduct(formDataToSend);
+      setFormData({
+        codProduct: "",
+        name: "",
+        price: "",
+        description: "",
+        images: "",
+        stock: "",
+        sold: 0,
+        category: "",
+      });
+    } catch (error) {
+      console.error('Erro ao criar produto:', error);
+    }
   };
 
   const [optionsCategories, setCategories] = useState([]);
 
   useEffect(() => {
     const GetCategories = async () => {
-
       try {
         const categories = await GetProductCategories();
         setCategories(categories);
       } catch (error) {
-        return {message: "Não foi possível realizar operação no momento."}
+        return { message: "Não foi possível realizar operação no momento." };
       }
     };
     GetCategories();
   }, []);
 
-  const SelectCategories = optionsCategories.map(cat => cat.category);
+  const SelectCategories = optionsCategories.map((cat) => cat.category);
 
   return (
     <WrapForm>
-      <FormContainer onSubmit={handleSubmit}>
+      <FormContainer onSubmit={handleSubmit} encType="multipart/form-data">
         <FormGroup>
           <Label htmlFor="codProduct">Código:</Label>
           <Input
@@ -99,12 +122,11 @@ const FormCreateProduct = () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="image">Imagem:</Label>
+          <Label htmlFor="images">imagem:</Label>
           <Input
             type="file"
-            id="image"
-            name="image"
-            value={formData.image}
+            id="images"
+            name="images"
             onChange={handleChange}
             required
           />
