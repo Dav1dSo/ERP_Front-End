@@ -5,13 +5,16 @@ import {
   FormGroup,
   Input,
   Label,
+  MessageError,
+  MessageSuccess,
+  Select,
   TextArea,
   WrapForm,
 } from "./FormCreateProduct-style";
 import {
   GetProductCategories,
   CreateProduct,
-} from "../../../Services/GetCategories";
+} from "../../../Services/ServicesProducts";
 
 const FormCreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -28,7 +31,7 @@ const FormCreateProduct = () => {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
-    if (name === 'images' && files.length > 0) {
+    if (name === "images" && files.length > 0) {
       const selectedFile = files[0];
       setFormData({ ...formData, [name]: selectedFile });
     } else {
@@ -36,21 +39,23 @@ const FormCreateProduct = () => {
     }
   };
 
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formDataToSend = new FormData();
-    formDataToSend.append('images', formData.images);
-    formDataToSend.append('codProduct', formData.codProduct);
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('price', formData.price);
-    formDataToSend.append('description', formData.description);
-    formDataToSend.append('stock', formData.stock);
-    formDataToSend.append('sold', formData.sold);
-    formDataToSend.append('category', formData.category);
+    formDataToSend.append("images", formData.images);
+    formDataToSend.append("codProduct", formData.codProduct);
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("price", formData.price);
+    formDataToSend.append("description", formData.description);
+    formDataToSend.append("stock", formData.stock);
+    formDataToSend.append("sold", formData.sold);
+    formDataToSend.append("category", formData.category);
 
     try {
-      await CreateProduct(formDataToSend);
+      const res = await CreateProduct(formDataToSend);
       setFormData({
         codProduct: "",
         name: "",
@@ -61,8 +66,16 @@ const FormCreateProduct = () => {
         sold: 0,
         category: "",
       });
+      res.includes("Error:")
+        ? setMessageType("error")
+        : setMessageType("success");
+      setMessage(res);
+      setTimeout(() => {
+        setMessage(null);
+        setMessageType(null);
+      }, 5000);
     } catch (error) {
-      console.error('Erro ao criar produto:', error);
+      console.error("Erro ao criar produto:");
     }
   };
 
@@ -84,6 +97,16 @@ const FormCreateProduct = () => {
 
   return (
     <WrapForm>
+      {messageType === "success" && (
+        <MessageSuccess>
+          <p>{message}</p>
+        </MessageSuccess>
+      )}
+      {messageType === "error" && (
+        <MessageError>
+          <p>{message}</p>
+        </MessageError>
+      )}
       <FormContainer onSubmit={handleSubmit} encType="multipart/form-data">
         <FormGroup>
           <Label htmlFor="codProduct">Código:</Label>
@@ -145,21 +168,22 @@ const FormCreateProduct = () => {
         </FormGroup>
         <FormGroup>
           <Label htmlFor="category">Categoria:</Label>
-          <Input
-            type="text"
+          <Select
             id="category"
             name="category"
             value={formData.category}
             onChange={handleChange}
-            list="category-options"
-            placeholder="Selecione a categoria"
             required
-          />
-          <datalist id="category-options">
+          >
+            <option value="" disabled hidden>
+              Selecione a categoria
+            </option>
             {SelectCategories.map((category, index) => (
-              <option key={index} value={category} />
+              <option key={index} value={category}>
+                {category}
+              </option>
             ))}
-          </datalist>
+          </Select>
         </FormGroup>
         <FormGroup>
           <Label htmlFor="description">Descrição:</Label>

@@ -1,9 +1,50 @@
-// FormCreateProduct-style.js
 import styled from "styled-components";
 
 const WrapForm = styled.div`
   margin-left: 25%;
   width: 50vw;
+`;
+
+
+const MessageSuccess= styled.span`
+  p {
+    border-radius: 10px;
+    margin-bottom: 3vh;
+    max-width: 20vw;
+    padding: 2%;
+    background-color: green;
+    animation: fadeIn 1.0s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+`;
+const MessageError= styled.span`
+  p {
+    border-radius: 10px;
+    margin-bottom: 3vh;
+    max-width: 20vw;
+    padding: 2%;
+    background-color: red;
+    animation: fadeIn 1.0s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
 `;
 
 const FormContainer = styled.form`
@@ -57,9 +98,16 @@ const Select = styled.select`
   padding: 0.7rem;
   border: none;
   border-radius: 4px;
-  width: 90%;
+  width: 97%;
 
-  /* Adicione estilos adicionais conforme necessário */
+  option {
+    color: black;
+    padding: 2rem;  
+    background-color: #e7ebed;
+    border-bottom: 1px solid #ced4da;
+    font-size: 16px;  
+  }
+
 `;
 
 const Button = styled.button`
@@ -84,4 +132,4 @@ const Button = styled.button`
 `;
 
 export { FormContainer, FormGroup, Label, Input, TextArea, Button,
-WrapForm, Select };
+WrapForm, Select, MessageSuccess, MessageError };
