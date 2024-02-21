@@ -1,9 +1,50 @@
-// FormCreateProduct-style.js
 import styled from "styled-components";
 
 const WrapForm = styled.div`
   margin-left: 25%;
   width: 50vw;
+`;
+
+
+const MessageSuccess= styled.span`
+  p {
+    border-radius: 10px;
+    margin-bottom: 3vh;
+    max-width: 20vw;
+    padding: 2%;
+    background-color: green;
+    animation: fadeIn 1.0s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+`;
+const MessageError= styled.span`
+  p {
+    border-radius: 10px;
+    margin-bottom: 3vh;
+    max-width: 20vw;
+    padding: 2%;
+    background-color: red;
+    animation: fadeIn 1.0s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
 `;
 
 const FormContainer = styled.form`
@@ -32,6 +73,13 @@ const Input = styled.input`
   border: none;
   border-radius: 4px;
   width: 90%;
+
+  &[type="file"] {
+    border: 1px solid #a0a0a0;
+    padding: 0.5rem;
+    
+  }
+
 `;
 
 const TextArea = styled.textarea`
@@ -42,7 +90,22 @@ const TextArea = styled.textarea`
   resize: vertical;
 
   @media (max-width: 768px) {
-    max-width: 83%;  
+    max-width: 77%;  
+  }
+`;
+
+const Select = styled.select`
+  padding: 0.7rem;
+  border: none;
+  border-radius: 4px;
+  width: 97%;
+
+  option {
+    color: black;
+    padding: 2rem;  
+    background-color: #e7ebed;
+    border-bottom: 1px solid #ced4da;
+    font-size: 16px;  
   }
 
 `;
@@ -68,4 +131,5 @@ const Button = styled.button`
   }
 `;
 
-export { FormContainer, FormGroup, Label, Input, TextArea, Button, WrapForm };
+export { FormContainer, FormGroup, Label, Input, TextArea, Button,
+WrapForm, Select, MessageSuccess, MessageError };

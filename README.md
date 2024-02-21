@@ -1,4 +1,4 @@
-# ERP_Front-End
+# ERP_Front-End 
 
 ERP system that seeks to give the user greater control over their product stock, simplifying data monitoring and facilitating bureaucratic processes through an intuitive interface and easy data reading.
 
@@ -45,4 +45,4 @@ Start the server
 
 ## Api Reference
 
-[API_ERP](https://github.com/Dav1dSo/API_ERP.git) 
+[API_ERP](https://github.com/Dav1dSo/API_ERP.git)  
