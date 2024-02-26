@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const token= ''
+const token = localStorage.getItem("userToken");
 
 const GetProductCategories = async () => {
   try {
