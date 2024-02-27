@@ -1,22 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import ContentMain from "./components/ContentMain/ContentMain";
-import Menu from "./components/Menu/Menu";
 import NavBar from "./components/NavBar/NavBar";
+import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
+import GetToken from "./functions/GetToken";
+import ParseJwt from "./Functions/VerifyToken";
 
 function App() {
-  const [selectOption, setSelectOption] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleSelectOptionChange = (option) => {
-    setSelectOption(option);
+  useEffect(() => {
+    const userToken = GetToken();
+    if (userToken) {
+      const decodedToken = ParseJwt(userToken);
+      if (decodedToken.exp * 1000 > Date.now()) {
+        setIsLoggedIn(true);
+      } else {
+        handleLogout();
+      }
+    }
+  }, []);
+
+  const handleLogin = () => setIsLoggedIn(true);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    setIsLoggedIn(false);
   };
+
   return (
     <>
-      <NavBar />
-      <div id="Admin">
-        <Menu onSelectOptionChange={handleSelectOptionChange} />
-        <ContentMain Option={selectOption}/>
-      </div>
+      <NavBar onLogout={handleLogout} />
+      {isLoggedIn ? <Home /> : <Login onLogin={handleLogin} />}
     </>
   );
 }
